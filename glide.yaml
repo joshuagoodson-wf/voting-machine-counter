@@ -1,0 +1,6 @@
+package: github.com/joshuagoodson-wf/voting-machine-counter
+import:
+- package: github.com/garyburd/redigo
+  subpackages:
+  - redis
+- package: github.com/rakyll/globalconf
