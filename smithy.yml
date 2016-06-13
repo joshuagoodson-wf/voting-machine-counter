@@ -1,0 +1,17 @@
+project: custom
+language: go1.6
+runner_image: docker.webfilings.org/devops/smithy-runner-go1.6:3.3.2
+env:
+    - BUILD_PATH=$GOPATH/src/github.com/joshuagoodson-wf/voting-machine-counter
+before_script:
+    - go version
+    - go env
+script:
+    # move src to $GOPATH and build
+    - mkdir -p $BUILD_PATH && cp -R . $BUILD_PATH/
+    - cd $BUILD_PATH && go build
+    # move artifact to original smithy working dir
+    - cp $BUILD_PATH/voting-machine-counter ./voting-machine-counter
+artifacts:
+    docker:
+        - ./voting-machine-counter
